@@ -1,7 +1,8 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { PacmanLoader } from 'react-spinners'
 import { Planet } from '../types/PlanetTypes'
-import { BounceLoader } from 'react-spinners'
+import PlanetCard from './PlanetCard'
 
 const Planets = () => {
   // fn to fetch data, returns a promise
@@ -17,23 +18,25 @@ const Planets = () => {
 
   if (isLoading)
     return (
-      <div>
-        <BounceLoader color={'#00BFFF'} loading={isLoading} size={60} />
+      <div className='mt-10 grid place-items-center'>
+        <PacmanLoader color='#00BFFF' />
       </div>
     )
 
-  if (isError) return <div>Error: An error has occurred.</div>
+  if (isError)
+    return (
+      <div className='mt-10 grid place-items-center'>
+        <h1 className='text-4xl text-red-500'>Error fetching data</h1>
+      </div>
+    )
 
+  // return if successful
   return (
     <>
       <h2>Planets</h2>
       <div>
         {data.results.map((planet: Planet) => (
-          <div key={planet.name}>
-            <h3>{planet.name}</h3>
-            <p>Population: {planet.population}</p>
-            <p>Terrain: {planet.terrain}</p>
-          </div>
+          <PlanetCard key={planet.name} {...planet} />
         ))}
       </div>
     </>
