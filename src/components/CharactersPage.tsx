@@ -41,7 +41,7 @@ const CharactersPage = () => {
 
   // return if successful
   return (
-    <>
+    <div className='flex flex-col items-center'>
       <Header text='Characters' />
       <div className='flex w-80 justify-between mt-5'>
         <button
@@ -65,7 +65,7 @@ const CharactersPage = () => {
           <CharacterCard key={`${character.name}-${index}`} {...character} />
         ))}
       </div>
-    </>
+    </div>
   )
 }
 

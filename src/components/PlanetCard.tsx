@@ -4,7 +4,7 @@ import { Planet } from '../types/RickAndMortyTypes'
 const PlanetCard = (planet: Planet) => {
   return (
     <>
-      <div className='m-10 max-w-sm'>
+      <div className='m-10 w-80'>
         <div className='rounded-lg border bg-sand px-4 pt-8 pb-10 shadow-lg'>
           <h1 className='my-1 text-center text-xl font-bold leading-8 text-gray-900'>
             {planet.name}

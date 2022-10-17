@@ -45,7 +45,7 @@ const Planets = () => {
 
   // return if successful
   return (
-    <>
+    <div className='flex flex-col items-center'>
       <Header text='Planets' />
       <div className='flex w-80 justify-between mt-5'>
         <button
@@ -69,7 +69,7 @@ const Planets = () => {
           <PlanetCard key={`${location.name}-${index}`} {...location} />
         ))}
       </div>
-    </>
+    </div>
   )
 }
 

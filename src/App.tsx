@@ -15,8 +15,11 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <Navbar setPage={setPage} />
-        <div className='App'>{page === 'planets' ? <Planets /> : <CharactersPage />}</div>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <div className='flex justify-center'>
+          <Planets />
+          <CharactersPage />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </div>
       </QueryClientProvider>
     </>
   )
