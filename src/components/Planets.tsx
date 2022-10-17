@@ -16,8 +16,6 @@ const Planets = () => {
     page: page,
   }
 
-  console.log('fetchDataParams', fetchDataParams)
-
   // fetchPlanets is the async function that fetches the data
   const { isLoading, isError, data } = useQuery(
     ['location', fetchDataParams],
@@ -26,8 +24,6 @@ const Planets = () => {
       keepPreviousData: true,
     },
   )
-
-  console.log('data', data)
 
   if (isLoading)
     return (

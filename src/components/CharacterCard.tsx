@@ -2,7 +2,6 @@ import React from 'react'
 import { Character } from '../types/RickAndMortyTypes'
 
 const CharacterCard = (character: Character) => {
-  console.log(character)
   return (
     <div className='mx-auto my-10 flex max-w-md flex-col rounded-2xl bg-sand px-4 shadow md:max-w-2xl md:flex-row md:items-center'>
       <div className='shrink-0 my-4 md:mr-8 md:max-w-sm'>

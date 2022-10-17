@@ -1,4 +1,10 @@
-Spinners: https://www.davidhu.io/react-spinners/
+## Schwifty Facts - Learning React-Query
+
+<div align="center">
+  <img src="https://media4.giphy.com/media/zwSIuk7PkyMjsFBvxO/giphy.gif?cid=790b7611ff6aa6c411c2801fe931c4028429b25c84515746&rid=giphy.gif&ct=g">
+</div>
+
+This was a little project to learn more about React-Query. It's a simple app that displays random facts about Rick and Morty characters. It uses the [Rick and Morty API](https://rickandmortyapi.com/).
 
 Passing parameters to the `useQuery` hook from react-query:
 
@@ -17,28 +23,13 @@ const [page, setPage] = React.useState(1)
 
 // parameters to pass to the FetchData function
 const fetchDataParams = {
-  term: 'people',
-  page: page,
+  term: 'people', // the search term
+  page: page, // the page number
 }
 
 // FetchData is the async function that fetches the data
-// passing in the term 'people' to fetchPeople
-const { isLoading, isError, data } = useQuery(['Persons', fetchDataParams], () =>
-  FetchData(fetchDataParams),
-)
-```
-
-The `FetchData` function:
-
-```tsx
-import { PersonFetchTypes } from '../types/PersonFetchTypes'
-import { PlanetsData } from '../types/PlanetsFetchType'
-import { ParamType } from '../types/FetchParamType'
-
-export const FetchData = async (param: ParamType): Promise<PersonFetchTypes | PlanetsData> => {
-  const res = await fetch(`https://swapi.dev/api/${param.term}/?page=${param.page}`)
-  return res.json()
-}
+  const { isLoading, isError, data } = useQuery(['location', fetchDataParams],
+    () => FetchData(fetchDataParams))
 ```
 
 I also added some new buttons to the component to allow the user to navigate between pages, updating the `page` state variable. The cool thing about this is that the `useQuery` hook will automatically refetch the data when the page number changes. However, after each page completes its initial load, the data is stored in cache. This makes subsequent page loads much faster.
@@ -58,15 +49,34 @@ Learn more about pagination with react-query [here](https://tanstack.com/query/v
 
 In order to update the page number, we can add the following buttons:
 
-```tsx
-      <button onClick={() => setPage((old) => Math.max(old - 1, 1))} disabled={page === 1}>
-        Previous Page
-      </button>
-      <span>{page}</span>
-      <button
-        onClick={() => setPage((old) => (!data || !data.next ? old : old + 1))}
-        disabled={!data || !data.next}
-      >
+```jsx
+<button
+  onClick={() => setPage((old) => Math.max(old - 1, 1))}
+  disabled={page === 1}
+>
+  Previous Page
+</button>
+
+<span>{page}</span>
+
+<button
+  onClick={() => setPage((old) => (!data || !data.info.next ? old : old + 1))}
+  disabled={!data || !data.info.next}
+>
+  Next Page
+</button>
 ```
 
 By only setting the page number to the next page if there is data and the data has a next page, we can prevent the page number from going past the last page.
+
+## Final Thoughts
+
+This introduced me to the concept of caching data in React. I think this is a great way to improve the performance of an app. I will definitely be using this in future projects.
+
+## Resources
+
+- [React Query](https://react-query.tanstack.com/)
+- [Rick and Morty API](https://rickandmortyapi.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Prettier](https://prettier.io/)
+- [ESLint](https://eslint.org/)
