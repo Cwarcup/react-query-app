@@ -8,3 +8,38 @@ Passing parameters to the `useQuery` hook from react-query:
 ```
 
 The first parameter is the key, the second is the function to fetch the data. This took a little while to figure out but after finding the [correct documentation](https://tanstack.com/query/v4/docs/guides/migrating-to-react-query-3?from=reactQueryV3&original=https://react-query-v3.tanstack.com/guides/migrating-to-react-query-3#query-key-partspieces-are-no-longer-automatically-spread-to-the-query-function) it was easy to implement.
+
+Wanted to make the `fetchPeople` function more generic so I could use it to also fetch planets. I did this by renaning the function to `fetchData` and passing an object containing the search parameter and the page number. This is the function:
+
+```tsx
+// state to keep track of the page number
+const [page, setPage] = React.useState(1)
+
+// parameters to pass to the FetchData function
+const fetchDataParams = {
+  term: 'people',
+  page: page,
+}
+
+// FetchData is the async function that fetches the data
+// passing in the term 'people' to fetchPeople
+const { isLoading, isError, data } = useQuery(['Persons', fetchDataParams], () =>
+  FetchData(fetchDataParams),
+)
+```
+
+The `FetchData` function:
+
+```tsx
+import { PersonFetchTypes } from '../types/PersonFetchTypes'
+import { PlanetsData } from '../types/PlanetsFetchType'
+import { ParamType } from '../types/FetchParamType'
+
+export const FetchData = async (param: ParamType): Promise<PersonFetchTypes | PlanetsData> => {
+  const res = await fetch(`https://swapi.dev/api/${param.term}/?page=${param.page}`)
+  return res.json()
+}
+```
+
+I also added some new buttons to the component to allow the user to navigate between pages, updating the `page` state variable. The cool thing about this is that the `useQuery` hook will automatically refetch the data when the page number changes. However, after each page completes its initial load, the data is stored in cache. This makes subsequent page loads much faster.
+

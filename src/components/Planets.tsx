@@ -3,13 +3,22 @@ import { useQuery } from '@tanstack/react-query'
 import { PacmanLoader } from 'react-spinners'
 import { Planet } from '../types/PlanetTypes'
 import PlanetCard from './PlanetCard'
-import { fetchPlanets } from '../fetchers/FetchPlanets'
+import { FetchData } from '../fetchers/FetchData'
 
 const Planets = () => {
+  // state to store the page number
+  const [page, setPage] = React.useState(1)
+
+  // parameters for the fetchPlanets function
+  const fetchDataParams = {
+    term: 'planets',
+    page: page,
+  }
+
   // fetchPlanets is the async function that fetches the data
-  const { isLoading, isError, data } = useQuery(['planets', 'planets'], () =>
-    fetchPlanets('planets'),
-  )
+  const { isLoading, isError, data } = useQuery(['planets', fetchDataParams], () => FetchData(fetchDataParams))
+
+  console.log('data', data)
 
   if (isLoading)
     return (
@@ -29,8 +38,11 @@ const Planets = () => {
   return (
     <>
       <h2>Planets</h2>
+      <button onClick={() => setPage(1)}>Page 1</button>
+      <button onClick={() => setPage(2)}>Page 2</button>
+      <button onClick={() => setPage(3)}>Page 3</button>
       <div>
-        {data.results.map((planet: Planet) => (
+        {data.results.map((planet: any) => (
           <PlanetCard key={planet.name} {...planet} />
         ))}
       </div>
