@@ -4,6 +4,7 @@ import { PacmanLoader } from 'react-spinners'
 import { Planet } from '../types/RickAndMortyTypes'
 import PlanetCard from './PlanetCard'
 import { FetchData } from '../fetchers/FetchData'
+import Header from '../TailwindComponents/HeaderText'
 
 const Planets = () => {
   // state to store the page number
@@ -45,17 +46,24 @@ const Planets = () => {
   // return if successful
   return (
     <>
-      <h2>Planets</h2>
-      <button onClick={() => setPage((old) => Math.max(old - 1, 1))} disabled={page === 1}>
-        Previous Page
-      </button>
-      <span>{page}</span>
-      <button
-        onClick={() => setPage((old) => (!data || !data.info.next ? old : old + 1))}
-        disabled={!data || !data.info.next}
-      >
-        Next Page
-      </button>
+      <Header text='Planets' />
+      <div className='flex w-80 justify-between mt-5'>
+        <button
+          className='bg-sand hover:bg-lightSand text-darkBlue font-bold py-2 px-4 rounded'
+          onClick={() => setPage((old) => Math.max(old - 1, 1))}
+          disabled={page === 1}
+        >
+          Previous Page
+        </button>
+        <span>{page}</span>
+        <button
+          className='bg-sand hover:bg-lightSand text-darkBlue font-bold py-2 px-4 rounded'
+          onClick={() => setPage((old) => (!data || !data.info.next ? old : old + 1))}
+          disabled={!data || !data.info.next}
+        >
+          Next Page
+        </button>
+      </div>
       <div>
         {data.results.map((location: Planet, index: number) => (
           <PlanetCard key={`${location.name}-${index}`} {...location} />
