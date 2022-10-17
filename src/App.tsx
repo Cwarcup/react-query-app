@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Navbar from './components/Navbar'
 import Planets from './components/Planets'
-import People from './components/People'
+import CharactersPage from './components/CharactersPage'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <Navbar setPage={setPage} />
-        <div className='App'>{page === 'planets' ? <Planets /> : <People />}</div>
+        <div className='App'>{page === 'planets' ? <Planets /> : <CharactersPage />}</div>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>

@@ -14,7 +14,7 @@ const Navbar = ({ setPage }: AppProps) => {
           <span className='mr-2 text-3xl text-red-600'>
             <Logo />
           </span>
-          <span>Star Wars Info</span>
+          <span>Schwifty Facts</span>
         </a>
         <input className='peer hidden' type='checkbox' id='navbar-open' />
         <label
@@ -30,12 +30,12 @@ const Navbar = ({ setPage }: AppProps) => {
           <ul className='flex flex-col gap-y-4 sm:flex-row sm:gap-x-8'>
             <li onClick={() => setPage('people')}>
               <a className='text-gray-600 hover:text-blue-600' href='#'>
-                People
+                Characters
               </a>
             </li>
             <li onClick={() => setPage('planets')}>
               <a className='text-gray-600 hover:text-blue-600' href='#'>
-                Plants
+                Planets
               </a>
             </li>
           </ul>

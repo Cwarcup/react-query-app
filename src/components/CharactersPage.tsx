@@ -2,10 +2,10 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { PacmanLoader } from 'react-spinners'
 import { FetchData } from '../fetchers/FetchData'
-import PersonCard from './PersonCard'
+import CharacterCard from './CharacterCard'
 import { Character } from '../types/RickAndMortyTypes'
 
-const Persons = () => {
+const CharactersPage = () => {
   const [page, setPage] = React.useState(1)
 
   // parameters to pass to the FetchData function
@@ -41,7 +41,7 @@ const Persons = () => {
   // return if successful
   return (
     <>
-      <h2>Persons</h2>
+      <h2>Characters</h2>
       <button onClick={() => setPage((old) => Math.max(old - 1, 1))} disabled={page === 1}>
         Previous Page
       </button>
@@ -54,11 +54,11 @@ const Persons = () => {
       </button>
       <div>
         {data.results.map((character: Character, index: number) => (
-          <PersonCard key={`${character.name}-${index}`} {...character} />
+          <CharacterCard key={`${character.name}-${index}`} {...character} />
         ))}
       </div>
     </>
   )
 }
 
-export default Persons
+export default CharactersPage
