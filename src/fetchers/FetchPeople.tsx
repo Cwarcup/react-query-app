@@ -1,6 +1,6 @@
-import { PlanetsData } from '../types/PlanetsFetchType'
+import { PersonFetchTypes } from '../types/PersonFetchTypes'
 
-export const fetchPeople = async (): Promise<any> => {
-  const res = await fetch('https://swapi.dev/api/people/')
+export const fetchPeople = async (term: string): Promise<PersonFetchTypes> => {
+  const res = await fetch(`https://swapi.dev/api/${term}/`)
   return res.json()
 }

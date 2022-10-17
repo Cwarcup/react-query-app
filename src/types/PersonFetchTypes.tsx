@@ -5,4 +5,6 @@ export type PersonFetchTypes = {
   next: string
   previous: string | null
   results: Person[]
+  key: string
+  greeting: string
 }

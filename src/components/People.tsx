@@ -7,9 +7,8 @@ import PersonCard from './PersonCard'
 
 const Persons = () => {
   // fetchPersons is the async function that fetches the data
-  const { isLoading, isError, data } = useQuery(['Persons'], fetchPeople)
-
-  console.log(data)
+  // passing in the term 'people' to fetchPeople
+  const { isLoading, isError, data } = useQuery(['Persons', 'people'], () => fetchPeople('people'))
 
   if (isLoading)
     return (

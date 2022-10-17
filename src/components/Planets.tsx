@@ -7,7 +7,9 @@ import { fetchPlanets } from '../fetchers/FetchPlanets'
 
 const Planets = () => {
   // fetchPlanets is the async function that fetches the data
-  const { isLoading, isError, data } = useQuery(['planets'], fetchPlanets)
+  const { isLoading, isError, data } = useQuery(['planets', 'planets'], () =>
+    fetchPlanets('planets'),
+  )
 
   if (isLoading)
     return (
