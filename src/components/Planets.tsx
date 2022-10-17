@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { PacmanLoader } from 'react-spinners'
-import { Planet } from '../types/PlanetTypes'
+import { Planet } from '../types/RickAndMortyTypes'
 import PlanetCard from './PlanetCard'
 import { FetchData } from '../fetchers/FetchData'
 
@@ -57,8 +57,8 @@ const Planets = () => {
         Next Page
       </button>
       <div>
-        {data.results.map((location: any) => (
-          <PlanetCard key={location.name} {...location} />
+        {data.results.map((location: Planet, index: number) => (
+          <PlanetCard key={`${location.name}-${index}`} {...location} />
         ))}
       </div>
     </>

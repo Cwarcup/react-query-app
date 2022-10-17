@@ -1,5 +1,5 @@
 import React from 'react'
-import { Planet } from '../types/PlanetTypes'
+import { Planet } from '../types/RickAndMortyTypes'
 
 const PlanetCard = (planet: Planet) => {
   return (

@@ -1,5 +1,3 @@
-import { PersonFetchTypes } from '../types/PersonFetchTypes'
-import { PlanetsData } from '../types/PlanetsFetchType'
 import { ParamType } from '../types/FetchParamType'
 
 export const FetchData = async (param: ParamType): Promise<any> => {

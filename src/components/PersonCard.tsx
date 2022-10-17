@@ -1,12 +1,10 @@
 import React from 'react'
-import { Person } from '../types/PersonTypes'
+import { Character } from '../types/RickAndMortyTypes'
 
-const PersonCard = (person: Person) => {
+const PersonCard = (character: Character) => {
   return (
     <div className='py-4 pyx-8 bg-sand my-8 rounded-md text-darkBlue'>
-      <h3>{person.name}</h3>
-      <p>Gender - {person.gender}</p>
-      <p>Birth year - {person.birth_year}</p>
+      <h3>{character.name}</h3>
     </div>
   )
 }

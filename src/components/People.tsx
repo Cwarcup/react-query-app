@@ -3,20 +3,21 @@ import { useQuery } from '@tanstack/react-query'
 import { PacmanLoader } from 'react-spinners'
 import { FetchData } from '../fetchers/FetchData'
 import PersonCard from './PersonCard'
+import { Character } from '../types/RickAndMortyTypes'
 
 const Persons = () => {
   const [page, setPage] = React.useState(1)
 
   // parameters to pass to the FetchData function
   const fetchDataParams = {
-    term: 'people',
+    term: 'character',
     page: page,
   }
 
   // FetchData is the async function that fetches the data
   // passing in the term 'people' to fetchPeople
   const { isLoading, isError, data } = useQuery(
-    ['Persons', fetchDataParams],
+    ['characters', fetchDataParams],
     () => FetchData(fetchDataParams),
     {
       keepPreviousData: true,
@@ -46,14 +47,14 @@ const Persons = () => {
       </button>
       <span>{page}</span>
       <button
-        onClick={() => setPage((old) => (!data || !data.next ? old : old + 1))}
-        disabled={!data || !data.next}
+        onClick={() => setPage((old) => (!data || !data.info.next ? old : old + 1))}
+        disabled={!data || !data.info.next}
       >
         Next Page
       </button>
       <div>
-        {data.results.map((Person: any) => (
-          <PersonCard key={Person.name} {...Person} />
+        {data.results.map((character: Character, index: number) => (
+          <PersonCard key={`${character.name}-${index}`} {...character} />
         ))}
       </div>
     </>
