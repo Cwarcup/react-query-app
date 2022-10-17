@@ -3,18 +3,11 @@ import { useQuery } from '@tanstack/react-query'
 import { PacmanLoader } from 'react-spinners'
 import { Planet } from '../types/PlanetTypes'
 import PlanetCard from './PlanetCard'
+import { fetchPlanets } from '../fetchers/FetchPlanets'
 
 const Planets = () => {
-  // fn to fetch data, returns a promise
-  const fetchPlanets = async () => {
-    const res = await fetch('https://swapi.dev/api/planets/')
-    return res.json()
-  }
-
   // fetchPlanets is the async function that fetches the data
   const { isLoading, isError, data } = useQuery(['planets'], fetchPlanets)
-
-  console.log(data)
 
   if (isLoading)
     return (
