@@ -16,7 +16,13 @@ const Planets = () => {
   }
 
   // fetchPlanets is the async function that fetches the data
-  const { isLoading, isError, data } = useQuery(['planets', fetchDataParams], () => FetchData(fetchDataParams))
+  const { isLoading, isError, data } = useQuery(
+    ['planets', fetchDataParams],
+    () => FetchData(fetchDataParams),
+    {
+      keepPreviousData: true,
+    },
+  )
 
   console.log('data', data)
 
@@ -38,9 +44,16 @@ const Planets = () => {
   return (
     <>
       <h2>Planets</h2>
-      <button onClick={() => setPage(1)}>Page 1</button>
-      <button onClick={() => setPage(2)}>Page 2</button>
-      <button onClick={() => setPage(3)}>Page 3</button>
+      <button onClick={() => setPage((old) => Math.max(old - 1, 1))} disabled={page === 1}>
+        Previous Page
+      </button>
+      <span>{page}</span>
+      <button
+        onClick={() => setPage((old) => (!data || !data.next ? old : old + 1))}
+        disabled={!data || !data.next}
+      >
+        Next Page
+      </button>
       <div>
         {data.results.map((planet: any) => (
           <PlanetCard key={planet.name} {...planet} />
